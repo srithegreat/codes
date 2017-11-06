@@ -6,7 +6,8 @@ suppressMessages({
 # Collect Metadata
 METADATA<-read.table("./Metadata.txt",sep='\t', header=T, stringsAsFactors=F, row.names = 1, check.names=FALSE)
 # Collect samples failed QC
-SAMPLES.EXCLUDE = c((data.table::fread("MayoRNAseq_RNAseq_TCX_QCdetails.txt", data.table=F, header=T))$`Sample Name`)
+SAMPLES.EXCLUDE = c((data.table::fread("MayoRNAseq_RNAseq_TCX_QCdetails.txt", data.table=F, header=T))
+$`Sample Name`)
 # Collect samples with Salmon tool output
 sample_id <- dir(file.path("/newvolume/RNAseq_Reprocessesing/processed_data/mayo_tcx/salmon_quant/"))
 # IMP: NEED TO CHECK HOW MANY SAMPLES ARE IN sample_id and edit 276
@@ -52,7 +53,8 @@ plot_pca(so, color_by = 'Diagnosis', text_labels = TRUE) +
 
 ```r
 # Filter PCA outliers
-s2c_a_pc <- dplyr::filter(s2c, !sample %in% c('7095_TCX', '1940_TCX', '1959_TCX', '1950_TCX', '1932_TCX', '11471_TCX', '11327_TCX', '1924_TCX', '11423_TCX'))
+s2c_a_pc <- dplyr::filter(s2c, !sample %in% c('7095_TCX', '1940_TCX', '1959_TCX', '1950_TCX', '1932_TCX',
+'11471_TCX', '11327_TCX', '1924_TCX', '11423_TCX'))
 # Create Sleuth object
 so_a_pc <- sleuth_prep(s2c_a_pc, extra_bootstrap_summary = TRUE, num_cores = 2)
 png(filename="./figures/filtered_samples_pca.png")
@@ -81,7 +83,8 @@ so_AD_C <- sleuth_lrt(so_AD_C, 'reduced', 'full')
 full_results <- sleuth_results(so_AD_C, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significant <- dplyr::filter(full_results, qval <= 0.05)
 # Prepare result with ID as transcript_id|gene_name
-sl_sig <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significant$target_id, "|", fixed = TRUE), function(x) paste(x[1], x[6], sep = '|')))), stringsAsFactors=FALSE)
+sl_sig <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significant$target_id, "|", fixed = TRUE),
+function(x) paste(x[1], x[6], sep = '|')))), stringsAsFactors=FALSE)
 sl_sig_rem <- (sleuth_significant[,2:13])
 sl_sig <- cbind(sl_sig, sl_sig_rem)
 write.table(sl_sig, file = "./sleuth/AD_C_signi_v1.txt", quote = FALSE, sep = "\t", row.names = FALSE)
@@ -99,7 +102,8 @@ so_PA_C <- sleuth_lrt(so_PA_C, 'reduced', 'full')
 full_resultsPA <- sleuth_results(so_PA_C, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significantPA <- dplyr::filter(full_resultsPA, qval <= 0.05)
 # Prepare result with ID as transcript_id|gene_name
-sl_sigPA <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPA$target_id, "|", fixed = TRUE), function(x) x[1]))), stringsAsFactors=FALSE)
+sl_sigPA <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPA$target_id, "|", fixed = TRUE),
+function(x) x[1]))), stringsAsFactors=FALSE)
 sl_sig_remPA <- (sleuth_significantPA[,2:13])
 sl_sigPA <- cbind(sl_sigPA, sl_sig_remPA)
 write.table(sl_sigPA, file = "./sleuth/PA_C_signi_v1.txt", quote = FALSE, sep = "\t", row.names = FALSE)
@@ -117,7 +121,8 @@ so_PSP_C <- sleuth_lrt(so_PSP_C, 'reduced', 'full')
 full_resultsPSP <- sleuth_results(so_PSP_C, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significantPSP <- dplyr::filter(full_resultsPSP, qval <= 0.05)
 # Prepare result with ID as transcript_id|gene_name
-sl_sigPSP <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPSP$target_id, "|", fixed = TRUE), function(x) x[1]))), stringsAsFactors=FALSE)
+sl_sigPSP <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPSP$target_id, "|", fixed = TRUE),
+function(x) x[1]))), stringsAsFactors=FALSE)
 sl_sig_remPSP <- (sleuth_significantPSP[,2:13])
 sl_sigPSP <- cbind(sl_sigPSP, sl_sig_remPSP)
 write.table(sl_sigPSP, file = "./sleuth/PSP_C_signi_v1.txt", quote = FALSE, sep = "\t", row.names = FALSE)
