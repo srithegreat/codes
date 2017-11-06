@@ -1,8 +1,8 @@
 ## Differential Expression Analysis of Isoforms using Sleuth tool
 
-######title: "isoform_de_v1"
-######author: "Philge Philip, philgev2@gmail.com"
-######date: "9/7/2017"
+######title: "isoform_de_v1"  
+######author: "Philge Philip, philgev2@gmail.com"  
+######date: "9/7/2017"  
 
 ### Data collection and processing
 ```r
