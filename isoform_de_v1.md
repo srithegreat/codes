@@ -6,7 +6,7 @@ suppressMessages({
 # Collect Metadata
 METADATA<-read.table("./Metadata.txt",sep='\t', header=T, stringsAsFactors=F, row.names = 1, check.names=FALSE)
 # Collect samples failed QC
-SAMPLES.EXCLUDE = c((data.table::fread("MayoRNAseq_RNAseq_TCX_QCdetails.txt", data.table=F, header=T))
+SAMPLES.EXCLUDE = c((data.table::fread("MayoRNAseq_RNAseq_TCX_QCdetails.txt", data.table=F, header=T))\
 $`Sample Name`)
 # Collect samples with Salmon tool output
 sample_id <- dir(file.path("/newvolume/RNAseq_Reprocessesing/processed_data/mayo_tcx/salmon_quant/"))
@@ -102,7 +102,7 @@ so_PA_C <- sleuth_lrt(so_PA_C, 'reduced', 'full')
 full_resultsPA <- sleuth_results(so_PA_C, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significantPA <- dplyr::filter(full_resultsPA, qval <= 0.05)
 # Prepare result with ID as transcript_id|gene_name
-sl_sigPA <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPA$target_id, "|", 
+sl_sigPA <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPA$target_id, "|", \
 fixed = TRUE), function(x) x[1]))), stringsAsFactors=FALSE)
 sl_sig_remPA <- (sleuth_significantPA[,2:13])
 sl_sigPA <- cbind(sl_sigPA, sl_sig_remPA)
@@ -122,7 +122,7 @@ so_PSP_C <- sleuth_lrt(so_PSP_C, 'reduced', 'full')
 full_resultsPSP <- sleuth_results(so_PSP_C, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significantPSP <- dplyr::filter(full_resultsPSP, qval <= 0.05)
 # Prepare result with ID as transcript_id|gene_name
-sl_sigPSP <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPSP$target_id, "|", 
+sl_sigPSP <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPSP$target_id, "|", \
 fixed = TRUE), function(x) x[1]))), stringsAsFactors=FALSE)
 sl_sig_remPSP <- (sleuth_significantPSP[,2:13])
 sl_sigPSP <- cbind(sl_sigPSP, sl_sig_remPSP)
