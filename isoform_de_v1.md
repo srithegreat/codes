@@ -102,8 +102,8 @@ so_PA_C <- sleuth_lrt(so_PA_C, 'reduced', 'full')
 full_resultsPA <- sleuth_results(so_PA_C, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significantPA <- dplyr::filter(full_resultsPA, qval <= 0.05)
 # Prepare result with ID as transcript_id|gene_name
-sl_sigPA <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPA$target_id, "|", fixed = TRUE),
-function(x) x[1]))), stringsAsFactors=FALSE)
+sl_sigPA <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPA$target_id, "|", 
+fixed = TRUE), function(x) x[1]))), stringsAsFactors=FALSE)
 sl_sig_remPA <- (sleuth_significantPA[,2:13])
 sl_sigPA <- cbind(sl_sigPA, sl_sig_remPA)
 write.table(sl_sigPA, file = "./sleuth/PA_C_signi_v1.txt", quote = FALSE, sep = "\t", row.names = FALSE)
