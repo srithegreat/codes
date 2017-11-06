@@ -53,7 +53,7 @@ plot_pca(so, color_by = 'Diagnosis', text_labels = TRUE) +
 
 ```r
 # Filter PCA outliers
-s2c_a_pc <- dplyr::filter(s2c, !sample %in% c('7095_TCX', '1940_TCX', '1959_TCX', '1950_TCX', '1932_TCX',
+s2c_a_pc <- dplyr::filter(s2c, !sample %in% c('7095_TCX', '1940_TCX', '1959_TCX', '1950_TCX', '1932_TCX',\
 '11471_TCX', '11327_TCX', '1924_TCX', '11423_TCX'))
 # Create Sleuth object
 so_a_pc <- sleuth_prep(s2c_a_pc, extra_bootstrap_summary = TRUE, num_cores = 2)
@@ -83,7 +83,7 @@ so_AD_C <- sleuth_lrt(so_AD_C, 'reduced', 'full')
 full_results <- sleuth_results(so_AD_C, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significant <- dplyr::filter(full_results, qval <= 0.05)
 # Prepare result with ID as transcript_id|gene_name
-sl_sig <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significant$target_id, "|", fixed = TRUE),
+sl_sig <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significant$target_id, "|", fixed = TRUE),\
 function(x) paste(x[1], x[6], sep = '|')))), stringsAsFactors=FALSE)
 sl_sig_rem <- (sleuth_significant[,2:13])
 sl_sig <- cbind(sl_sig, sl_sig_rem)
@@ -107,7 +107,8 @@ fixed = TRUE), function(x) x[1]))), stringsAsFactors=FALSE)
 sl_sig_remPA <- (sleuth_significantPA[,2:13])
 sl_sigPA <- cbind(sl_sigPA, sl_sig_remPA)
 write.table(sl_sigPA, file = "./sleuth/PA_C_signi_v1.txt", quote = FALSE, sep = "\t", row.names = FALSE)
-write.table(head(sl_sigPA, 20), file = "./sleuth/PA_C_signi20.txt", quote = FALSE, sep = "\t", row.names = FALSE)
+write.table(head(sl_sigPA, 20), file = "./sleuth/PA_C_signi20.txt", quote = FALSE, sep = "\t", row.names = \
+FALSE)
 
 # Filter Third Case and Control
 s2c_a_pc_PSP_C <- dplyr::filter(s2c_a_pc, Diagnosis %in% c('PSP', 'CONTROL'))
@@ -126,7 +127,8 @@ fixed = TRUE), function(x) x[1]))), stringsAsFactors=FALSE)
 sl_sig_remPSP <- (sleuth_significantPSP[,2:13])
 sl_sigPSP <- cbind(sl_sigPSP, sl_sig_remPSP)
 write.table(sl_sigPSP, file = "./sleuth/PSP_C_signi_v1.txt", quote = FALSE, sep = "\t", row.names = FALSE)
-write.table(head(sl_sigPSP, 20), file = "./sleuth/PSP_C_signi20.txt", quote = FALSE, sep = "\t", row.names = FALSE)
+write.table(head(sl_sigPSP, 20), file = "./sleuth/PSP_C_signi20.txt", quote = FALSE, sep = "\t", \
+row.names = FALSE)
 
 # Get count of isoforms differentially expressed in each comparison
 tot1 <- length(sl_sig$target_id)
