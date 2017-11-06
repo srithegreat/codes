@@ -11,7 +11,7 @@ suppressMessages({
   library('sleuth')
 })
 # Collect Metadata
-METADATA<-read.table("./Metadata.txt",sep='\t', header=T, stringsAsFactors=F, row.names = 1, check.names=FALSE)
+METADATA<-read.table("./Metadata.txt", sep='\t', header=T, stringsAsFactors=F, row.names = 1, check.names=FALSE)
 # Collect samples failed QC
 SAMPLES.EXCLUDE = c((data.table::fread("MayoRNAseq_RNAseq_TCX_QCdetails.txt", data.table=F, header=T))\
 $`Sample Name`)
