@@ -29,30 +29,24 @@ s2c <- dplyr::mutate(sample_to_condition, path = kal_dirs)
 # Create Sleuth object
 so <- sleuth_prep(s2c, extra_bootstrap_summary = TRUE, num_cores = 2)
 new_position_theme <- theme(legend.position = c(0.80, 0.90))
+```
+
+### Samples Density
+```r
 png(filename="./figures/all_samples_density.png")
 plot_group_density(so, use_filtered = TRUE, units = "est_counts",
   trans = "log", grouping = "Diagnosis", offset = 1) +
   new_position_theme
 dev.off()
+```
+
+### Samples PCA
+```r
 png(filename="./figures/all_samples_pca.png")
 plot_pca(so, color_by = 'Diagnosis', text_labels = TRUE) +
   new_position_theme
 dev.off()
 ```
-
-### Samples Density
-```r
-plot_group_density(so, use_filtered = TRUE, units = "est_counts",
-  trans = "log", grouping = "Diagnosis", offset = 1) +
-  new_position_theme
-```
-
-### Samples PCA
-```r
-plot_pca(so, color_by = 'Diagnosis', text_labels = TRUE) +
-  new_position_theme
-```
-
 
 ```r
 # Filter PCA outliers
@@ -60,16 +54,14 @@ s2c_a_pc <- dplyr::filter(s2c, !sample %in% c('7095_TCX', '1940_TCX', '1959_TCX'
 '11471_TCX', '11327_TCX', '1924_TCX', '11423_TCX'))
 # Create Sleuth object
 so_a_pc <- sleuth_prep(s2c_a_pc, extra_bootstrap_summary = TRUE, num_cores = 2)
-png(filename="./figures/filtered_samples_pca.png")
-plot_pca(so_a_pc, color_by = 'Diagnosis', text_labels = TRUE) +
-  new_position_theme
-dev.off()
 ```
 
 ### Samples PCA after outlier removal
 ```r
+png(filename="./figures/filtered_samples_pca.png")
 plot_pca(so_a_pc, color_by = 'Diagnosis', text_labels = TRUE) +
   new_position_theme
+dev.off()
 ```
 
 ### Differential expression analysis after Covariate adjustment
@@ -145,16 +137,13 @@ inter123 <- length(intersect(intersect(sl_sig$target_id, sl_sigPA$target_id), sl
 
 # Plot Venn Diagram
 library(VennDiagram)
+```
+
+### Overlap of differentially expressed isoforms in samples compared
+```r
 png(filename="./figures/comp_venn_v1.png")
 draw.triple.venn(area1 = tot1, area2 = tot2, area3 = tot3, n12 = inter12, n23 = inter23, n13 = inter13, 
     n123 = inter123, category = c("AD vs CON", "PA vs CON", "PSP vs CON"), lty = "blank", 
     fill = c("skyblue", "pink1", "mediumorchid"))
 dev.off()
-```
-
-### Overlap of differentially expressed isoforms in samples compared
-```r
-draw.triple.venn(area1 = tot1, area2 = tot2, area3 = tot3, n12 = inter12, n23 = inter23, n13 = inter13, 
-    n123 = inter123, category = c("AD vs CON", "PA vs CON", "PSP vs CON"), lty = "blank", 
-    fill = c("skyblue", "pink1", "mediumorchid"))
 ```
