@@ -121,8 +121,8 @@ so_PSP_C <- sleuth_lrt(so_PSP_C, 'reduced', 'full')
 full_resultsPSP <- sleuth_results(so_PSP_C, 'reduced:full', 'lrt', show_all = FALSE)
 sleuth_significantPSP <- dplyr::filter(full_resultsPSP, qval <= 0.05)
 # Prepare result with ID as transcript_id|gene_name
-sl_sigPSP <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPSP$target_id, "|", fixed = TRUE),
-function(x) x[1]))), stringsAsFactors=FALSE)
+sl_sigPSP <- data.frame("target_id"=matrix(unlist(lapply(strsplit(sleuth_significantPSP$target_id, "|", 
+fixed = TRUE), function(x) x[1]))), stringsAsFactors=FALSE)
 sl_sig_remPSP <- (sleuth_significantPSP[,2:13])
 sl_sigPSP <- cbind(sl_sigPSP, sl_sig_remPSP)
 write.table(sl_sigPSP, file = "./sleuth/PSP_C_signi_v1.txt", quote = FALSE, sep = "\t", row.names = FALSE)
