@@ -1,3 +1,6 @@
+## Differential Expression Analysis of Isoforms using Sleuth tool
+
+### Data collection and processing
 ```r
 suppressMessages({
   library('cowplot')
@@ -37,14 +40,14 @@ plot_pca(so, color_by = 'Diagnosis', text_labels = TRUE) +
 dev.off()
 ```
 
-
+### Samples Density
 ```r
 plot_group_density(so, use_filtered = TRUE, units = "est_counts",
   trans = "log", grouping = "Diagnosis", offset = 1) +
   new_position_theme
 ```
 
-
+### Samples PCA
 ```r
 plot_pca(so, color_by = 'Diagnosis', text_labels = TRUE) +
   new_position_theme
@@ -63,13 +66,13 @@ plot_pca(so_a_pc, color_by = 'Diagnosis', text_labels = TRUE) +
 dev.off()
 ```
 
-
+### Samples PCA after outlier removal
 ```r
 plot_pca(so_a_pc, color_by = 'Diagnosis', text_labels = TRUE) +
   new_position_theme
 ```
 
-
+### Differential expression analysis after Covariate adjustment
 ```r
 # Filter First Case and Control
 s2c_a_pc_AD_C <- dplyr::filter(s2c_a_pc, Diagnosis %in% c('AD', 'CONTROL'))
@@ -149,6 +152,7 @@ draw.triple.venn(area1 = tot1, area2 = tot2, area3 = tot3, n12 = inter12, n23 = 
 dev.off()
 ```
 
+### Overlap of differentially expressed isoforms in samples compared
 ```r
 draw.triple.venn(area1 = tot1, area2 = tot2, area3 = tot3, n12 = inter12, n23 = inter23, n13 = inter13, 
     n123 = inter123, category = c("AD vs CON", "PA vs CON", "PSP vs CON"), lty = "blank", 
