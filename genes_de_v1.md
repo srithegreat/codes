@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Collecting genes reads count
 
-```{r collection}
+```r
 library(edgeR)
 library(ggplot2)
 library(cqn)
@@ -43,7 +43,7 @@ exp <- exp[keep,]
 
 ### `r nrow(exp)` genes filtered which has a cpm of greater than 1 for at least two samples.
 
-```{r }
+```r
 nsamples <- ncol(exp)
 col <- brewer.pal(nsamples, "Paired")
 lcpm <- cpm(exp.full, log=TRUE)
@@ -74,7 +74,7 @@ dev.off()
 
 ## PCA to explore outliers
 
-```{r pca}
+```r
 PC <- prcomp(voom(t(exp))$E, scale.=T, center = T)
 samples <- rownames(PC$x)
 png(filename="./figures/PCA_outlier_analysis.png")
@@ -118,7 +118,7 @@ perl -pe 's/ +/\t/g' GRCm38_length_gc.tsv >GRCm38_length_gc_v1.tsv
 
 ### Initial normalisation usign cqn which remove the influence of GC content on counts, smooth the effect of gene length.
 
-```{r cqn}
+```r
 # Collect gene length and GC content
 GENE.LEN.GC <- read.table("./GRCm38_length_gc_v1.tsv", sep='\t', header=T, row.names = 1, stringsAsFactors=F, check.names=FALSE)
 # filtering genes in expression data
@@ -145,7 +145,7 @@ dev.off()
 
 ### Dispersion control with voom
 
-```{r }
+```r
 # Construct design
 group <- as.factor(c("A", "A", "B", "B"))
 design <- model.matrix(~0+group)
@@ -168,7 +168,7 @@ DE <- topTable(FIT.CONTR, number = Inf, adjust.method = "BH", sort.by = "p")
 ```
 ### The mean-variance relationship of log-CPM values for this dataset is shown in the left-hand panel. Typically, the voom-plot shows a decreasing trend between the means and variances resulting from a combination of technical variation in the sequencing experiment and biological variation amongst the replicate samples from different cell populations. Experiments with high biological variation usually result in flatter trends, where variance values plateau at high expression values. Experiments with low biological variation tend to result in sharp decreasing trends. The model’s residual variances are plotted against average expression values in the right-hand panel.
 
-```{r }
+```r
 # Get top 500 genes
 DE_500 <- head(DE, 500)
 DE.topgenes <- rownames(DE_500)
@@ -190,14 +190,14 @@ write.table(DE_500, file = "./top_500_deg.txt", quote = FALSE, sep = "\t", row.n
 
 ### Plot the heat map showing the normalized expression of DE genes
 
-```{r }
+```r
 Samples = c("A", "A", "B", "B")
 pheatmap(VOOM.WEIGHTS$E[DE.topgenes,],  color = colorRampPalette((brewer.pal(n = 9, name = "OrRd")))(9), border_color = NA, cellwidth = 20, cellheight = 3, show_colnames = T, annotation_col = data.frame(Samples, row.names = c("A_1", "A_2", "B_1", "B_2")), annotation_names_col = FALSE, labels_row = g_symb$external_gene_name, labels_col = group, filename = "./figures/heatmap.png", fontsize_row = 3, clustering_distance_cols = "euclidean", clustering_distance_rows = "euclidean")
 ```
 
 ## Gene ontology on the differentially expressed genes
 
-```{r }
+```r
 # Collect fold change of DE genes
 fold <- setNames(DE_500[,"logFC"], DE.topgenes_1)
 fold <- sort(fold, decreasing = T)
@@ -222,13 +222,14 @@ ego2 <- simplify(ego, cutoff=0.7, by="p.adjust", select_fun=min)
 head(ego2, 10)
 write.csv(ego2, file = "./gene_ontology.txt", quote = FALSE, row.names = FALSE)
 ```
-```{r }
+
+```r
 cnetplot(ego2, categorySize="pvalue", foldChange=fold, fixed = T)
 ```
 
 ## Pathway analysis on the differentially expressed genes
 
-```{r }
+```r
 # get uniprot ids
 up_1 = bitr(DE.topgenes_1, fromType="ENSEMBL", toType=c("UNIPROT"), OrgDb="org.Mm.eg.db")
 up = bitr(DE.genes_1, fromType="ENSEMBL", toType=c("UNIPROT"), OrgDb="org.Mm.eg.db")
