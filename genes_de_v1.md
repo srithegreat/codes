@@ -141,7 +141,7 @@ title(main="B. CQN Normalised",ylab="Log-cpm")}
 dev.off()
 ```
 ![alt text](./figures/data_normalization.png "Logo Title Text 3")
-### Boxplots of log-CPM values showing expression distributions for unnormalised data (A) and normalised data (B)
+### Figure: Boxplots of log-CPM values showing expression distributions for unnormalised data (A) and normalised data (B)
 
 ## Differential expression (DE) analysis
 
@@ -203,7 +203,7 @@ ENSMUSG00000064363.1|mt-Nd4|1.25126026|11.60642329|124.8993995|2.55E-14|4.06E-11
 ENSMUSG00000028965.13|Tnfrsf9|-2.325830783|8.77747308|-124.5765966|2.60E-14|4.06E-11|23.78605475
 ENSMUSG00000026249.10|Serpine2|4.423638752|6.970224139|122.0486693|3.06E-14|4.24E-11|22.63097952
 ENSMUSG00000050912.15|Tmem123|-1.903255652|8.16040951|-111.8056117|6.12E-14|7.49E-11|22.93191957
-### Top 10 differentially expressed genes (deg); top 500 deg can be found in ./codes/data/top_500_deg.txt
+### Table: Top 10 differentially expressed genes (deg); top 500 deg can be found in ./codes/data/top_500_deg.txt
 
 ### Plot the heat map showing the normalized expression of top 500 DE genes
 
@@ -241,15 +241,23 @@ ego <- enrichGO(gene          = DE.topgenes_1,
                 readable      = TRUE)
 # simplify enriched GO result
 ego2 <- simplify(ego, cutoff=0.7, by="p.adjust", select_fun=min)
-head(ego2, 10)
+head(ego2, 5)
 write.csv(ego2, file = "./gene_ontology.txt", quote = FALSE, row.names = FALSE)
 ```
-### Top 10 over represented gene ontology (biological process); all over represented gene ontology can be found in ./codes/data/gene_ontology.txt
+ID|Description|GeneRatio|BgRatio|pvalue|p.adjust|qvalue|geneID|Count
+---|---|---|---|---|---|---|---|---
+GO:0046649|lymphocyte activation|64/488|461/11099|9.69798632017757e-17|3.79094285255741e-13|2.55618502586575e-13|Il2/Cd2/Cd6/Ctla4/Hspd1/Irf4/Tnfrsf13b/Il2ra/Cdkn1a/Traf6/Cd5/Cd47/Prnp/Themis/Sdc4/Ap3b1/Xbp1/Cd44/Lgals1/Rab27a/Bcl2/Tnfsf11/Nfatc1/Stat3/Ptprc/Rbpj/Ebi3/Bax/Ccr6/Prex1/Ptk2b/Egr1/Cd81/Icos/Cd28/Treml2/Tnfsf4/Lcp1/Thy1/Fam49b/Itm2a/Foxp1/Spn/Il18r1/Zeb1/Sema4a/Nfkbid/Pik3r1/Rora/Foxp3/Itgb2/Il2rg/Stat5b/Irs2/Cd83/Il2rb/Slfn1/Pou2f2/Lrrc32/H2-T23/Hdac7/Cd4/Btla/Vsir|64
+GO:0042110|T cell activation|52/488|333/11099|6.85166095016204e-16|1.33915713270917e-12|9.02976790484513e-13|Il2/Cd2/Cd6/Ctla4/Hspd1/Irf4/Il2ra/Traf6/Cd5/Cd47/Prnp/Themis/Sdc4/Ap3b1/Xbp1/Cd44/Lgals1/Rab27a/Bcl2/Tnfsf11/Stat3/Ptprc/Ebi3/Bax/Ccr6/Prex1/Egr1/Icos/Cd28/Treml2/Tnfsf4/Lcp1/Thy1/Fam49b/Foxp1/Spn/Il18r1/Zeb1/Sema4a/Nfkbid/Rora/Foxp3/Itgb2/Il2rg/Stat5b/Cd83/Slfn1/Lrrc32/H2-T23/Cd4/Btla/Vsir|52
+GO:0001816|cytokine production|59/488|421/11099|1.12278993515471e-15|1.46299528550659e-12|9.86479297413123e-13|Il2/Tnfrsf9/Rnf19b/Cd2/Furin/Cd6/Ltb/Hspd1/Lta/Irf4/Ccl3/Traf6/Hif1a/Ndrg2/Trim30a/Prnp/Ncl/Xbp1/Il9/Ccl4/Il12rb2/Rbpj/Eif2ak2/Arrb1/Egr1/Hilpda/Irf8/Cd28/Tnfsf4/Il6ra/Pdcd4/Irf7/Zc3hav1/Fam49b/Isg15/Foxp1/Spn/Fn1/Tspo/Il17f/Il18r1/Tnf/Cadm1/Pik3r1/Rora/Anxa4/Foxp3/Slc37a4/Stat5b/S1pr3/Mapk3/Runx3/Cd83/Srgn/Lrrc32/H2-T23/Hdac7/Cd4/Vsir|59
+GO:0001817|regulation of cytokine production|54/488|377/11099|8.00268031391472e-15|6.53226795508263e-12|4.40462602079598e-12|Il2/Tnfrsf9/Cd2/Furin/Cd6/Ltb/Hspd1/Lta/Irf4/Ccl3/Traf6/Hif1a/Ndrg2/Trim30a/Prnp/Ncl/Xbp1/Il9/Ccl4/Il12rb2/Eif2ak2/Arrb1/Egr1/Hilpda/Irf8/Cd28/Tnfsf4/Il6ra/Pdcd4/Irf7/Zc3hav1/Fam49b/Isg15/Spn/Fn1/Tspo/Il17f/Il18r1/Tnf/Cadm1/Pik3r1/Rora/Anxa4/Foxp3/Slc37a4/Stat5b/S1pr3/Mapk3/Cd83/Srgn/Lrrc32/H2-T23/Hdac7/Vsir|54
+GO:0098602|single organism cell adhesion|56/488|402/11099|8.3554207662863e-15|6.53226795508263e-12|4.40462602079598e-12|Il2/Serpine2/Cd2/Cd6/Ctla4/Hspd1/Il2ra/Traf6/Cd5/Cd47/Prnp/Sdc4/Ap3b1/Xbp1/Cd44/Lgals1/Perp/Pkp4/Bcl2/Tnfsf11/Selplg/Ptprc/Map2k1/Cyr61/Ets1/Prex1/Nlgn2/Icos/Cd28/Tnfsf4/Myl12b/Vegfa/Plek/Thy1/Flna/Fam49b/Spn/Fn1/Tnf/Calr/Zeb1/Nfkbid/Pik3r1/Foxp3/Itgb2/Il2rg/Stat5b/Cd83/St6gal1/Slfn1/Lrrc32/Pvr/H2-T23/Cd4/Btla/Vsir|56
+### Table: Top 5 over represented gene ontology (biological process); all over represented gene ontology can be found in ./codes/data/gene_ontology.txt
 
 ```r
 cnetplot(ego2, categorySize="pvalue", foldChange=fold, fixed = F)
 ```
 ![alt text](./figures/gene_ontology.png "Logo Title Text 6")
+### Figure: Association of differentially expressed genes with gene ontology
 
 ## Pathway analysis on the differentially expressed genes
 
@@ -270,7 +278,14 @@ kk <- enrichKEGG(gene          =  up_1$UNIPROT,
 head(kk, 5)
 write.csv(head(kk, 5), file = "./pathway_analysis.txt", quote = FALSE, row.names = FALSE)
 ```
-### Top 5 enriched pathways
+ID|Description|GeneRatio|BgRatio|pvalue|p.adjust|qvalue|geneID|Count
+---|---|---|---|---|---|---|---|---
+mmu04066|HIF-1 signaling pathway|37/452|122/6476|4.09063034112917e-15|1.04311073698794e-12|6.84642341304776e-13|P09411/D2KHZ9/P16858/Q5FWB7/P05064/P39689/Q564P6/P17809/Q61221/Q3UCW2/P12382/Q8CD98/Q3TTB4/Q6GQU1/Q91YE3/P10417/P42227/Q3ULI4/A0A0R4J0H9/Q91UZ4/Q8BFP9/P31938/Q3TMJ8/P46414/Q60876/O08528/Q3URV7/P22272/Q00731/P17182/Q5FW97/Q3TP23/Q8C7P2/P26450/Q564E2/P06151/Q63844|37
+mmu04060|Cytokine-cytokine receptor interaction|49/452|224/6476|1.9678269026006e-13|2.50897930081576e-11|1.64676040796576e-11|P04351/P20334/Q3U3R1/A0A0U5JAA2/P41155/P09225/Q542S2/A5D8Y6/Q9ET35/P01590/Q544I2/P10855/Q5QNW0/P09056/P15247/P14097/Q5QNV9/D3Z6H5/P97378/P56484/Q3ZB17/O35235/P01586/Q5SX77/P51680/O54689/Q542B6/Q3UDV8/Q3UDL4/Q61727/B6DXE3/P43488/Q3URV7/P22272/Q00731/O55237/Q05A52/Q7TNI7/Q61098/P06804/Q3U593/O35714/Q540M6/Q3UPA9/P34902/Q9QZM4/Q04998/Q3UY39/P16297|49
+mmu05230|Central carbon metabolism in cancer|28/452|86/6476|1.43094835867036e-12|1.21630610486981e-10|7.98318557995044e-11|P57787/Q3TMA0/Q3UDP9/P17809/Q61221/Q3UCW2/P12382/Q8CD98/Q3TTB4/Q6GQU1/O08586/Q3UUT8/Q9Z127/Q8C605/Q9WUA3/Q3U7Z6/Q9DBJ1/Q8BFP9/P31938/Q3TMJ8/O08528/Q3TP23/Q8C7P2/P26450/Q564E2/P06151/Q63844/Q571F8|28
+mmu00010|Glycolysis / Gluconeogenesis|25/452|70/6476|2.21778087592155e-12|1.41383530839999e-10|9.27966208609282e-11|P09411/D2KHZ9/P16858/Q5FWB7/P05064/P06745/P17751/P12382/Q8CD98/Q3TTB4/Q6GQU1/Q3U6X6/Q9D0F9/Q8C605/Q9WUA3/P05063/Q3U7Z6/Q9DBJ1/A0A0R4J0G0/Q8BH04/O08528/P17182/Q5FW97/Q564E2/P06151|25
+mmu04514|Cell adhesion molecules (CAMs)|30/452|119/6476|3.04684214895518e-10|1.55388949596714e-08|1.01989031933447e-08|P08920/Q549Q4/Q61003/P09793/Q6GTR6/P14429/O35988/Q3U5S6/Q02242/Q544F3/Q3TA56/Q8C6Q7/S4R1S4/Q69ZK9/Q6PHN2/Q3V3X2/Q5SUZ7/Q9WVS0/P31041/Q8CDB3/P15702/Q544C5/Q8R5M8/P11835/Q542I8/Q8K094/P06339/Q3V014/P06332/Q3TSV7|30
+### Table: Top 5 enriched pathways
 
 ```r
 mmu04066 <- pathview(gene.data  = fold,
@@ -280,3 +295,4 @@ mmu04066 <- pathview(gene.data  = fold,
                      gene.idtype= "ENSEMBL")
 ```
 ![alt text](./figures/mmu04066.pathview.png "Logo Title Text 7")
+### Figure: Differentially expressed genes in enriched HIF-1 signalling pathway 
