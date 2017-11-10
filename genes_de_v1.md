@@ -41,7 +41,7 @@ keep <- rowSums(cpm(exp)>1) >= 2
 exp <- exp[keep,]
 ```
 
-### `r nrow(exp)` genes filtered which has a cpm of greater than 1 for at least two samples.
+### 12463 genes filtered which has a cpm of greater than 1 for at least two samples.
 
 ```r
 nsamples <- ncol(exp)
@@ -70,6 +70,7 @@ for (i in 2:nsamples){
 legend("topright", colnames(exp), text.col=col, bty="n")}
 dev.off()
 ```
+![alt text](./figures/data_filtering.png "Logo Title Text 1")
 ### The density of log-CPM values for raw pre-filtered data (A) and post-filtered data (B)
 
 ## PCA to explore outliers
@@ -166,7 +167,7 @@ dev.off()
 # Get differential expression
 DE <- topTable(FIT.CONTR, number = Inf, adjust.method = "BH", sort.by = "p")
 ```
-### The mean-variance relationship of log-CPM values for this dataset is shown in the left-hand panel. Typically, the voom-plot shows a decreasing trend between the means and variances resulting from a combination of technical variation in the sequencing experiment and biological variation amongst the replicate samples from different cell populations. Experiments with high biological variation usually result in flatter trends, where variance values plateau at high expression values. Experiments with low biological variation tend to result in sharp decreasing trends. The model’s residual variances are plotted against average expression values in the right-hand panel.
+#### The mean-variance relationship of log-CPM values for this dataset is shown in the left-hand panel. Typically, the voom-plot shows a decreasing trend between the means and variances resulting from a combination of technical variation in the sequencing experiment and biological variation amongst the replicate samples from different cell populations. Experiments with high biological variation usually result in flatter trends, where variance values plateau at high expression values. Experiments with low biological variation tend to result in sharp decreasing trends. The model’s residual variances are plotted against average expression values in the right-hand panel.
 
 ```r
 # Get top 500 genes
@@ -251,14 +252,3 @@ mmu04066 <- pathview(gene.data  = fold,
                      limit      = list(gene=max(abs(fold)), cpd=1),
                      gene.idtype= "ENSEMBL")
 ```
-
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
