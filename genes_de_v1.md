@@ -68,7 +68,7 @@ legend("topright", colnames(exp), text.col=col, bty="n")}
 dev.off()
 ```
 ![alt text](./figures/data_filtering.png "Logo Title Text 1")
-### The density of log-CPM values for raw pre-filtered data (A) and post-filtered data (B)
+### Figure: The density of log-CPM values for raw pre-filtered data (A) and post-filtered data (B)
 
 ## PCA to explore outliers
 
