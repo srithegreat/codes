@@ -83,7 +83,7 @@ ggplot(data.frame(PC$x),aes(PC1,PC2,color=samples)) +
   theme(plot.title = element_text(face="bold", color="black", size=14, hjust=0.5))
 dev.off()
 ```
-![alt text](./figures/PCA_outlier_analysis.png "Logo Title Text 2")
+![alt text](./figures/PCA_outlier_analysis_v1.png "Logo Title Text 2")
 #### Samples in condition B are dissimilar though belonging to same group; decided to proceed with them coz of no other replicates
 
 ## Calculating genes GC content and length
