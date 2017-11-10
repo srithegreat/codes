@@ -2,7 +2,6 @@
 title: "Differentially expression analysis of genes in mouse genome"
 author: "Philge Philip"
 date: "11/7/2017"
-output: html_document
 ---
 
 ## Collecting genes reads count
@@ -37,7 +36,9 @@ keep <- rowSums(cpm(exp)>1) >= 2
 exp <- exp[keep,]
 ```
 
-### 12463 genes filtered which has a cpm of greater than 1 for at least two samples.
+#### 12463 genes filtered which has a cpm of greater than 1 for at least two samples.
+
+## Genes Density
 
 ```r
 nsamples <- ncol(exp)
