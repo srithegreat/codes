@@ -107,7 +107,8 @@ exit;
 #### Using bedtools and emboss tool to calculate percentage GC content and length
 
 ```bash
-bedtools getfasta -fi GRCm38.p5.genome.fa -bed gencode.vM14.chr_patch_hapl_scaff.annotation.bed -name -fo GRCm38_genes.fa
+bedtools getfasta -fi GRCm38.p5.genome.fa -bed gencode.vM14.chr_patch_hapl_scaff.annotation.bed\
+-name -fo GRCm38_genes.fa
 infoseq -auto -only -name -length -pgc GRCm38_genes.fa >GRCm38_length_gc.tsv
 perl -pe 's/ +/\t/g' GRCm38_length_gc.tsv >GRCm38_length_gc_v1.tsv
 ```
@@ -137,6 +138,7 @@ boxplot(CQN.GENE_EXPRESSION$E, las=2, col=col, main="")
 title(main="B. CQN Normalised",ylab="Log-cpm")}
 dev.off()
 ```
+![alt text](./figures/data_normalization.png "Logo Title Text 3")
 ### Boxplots of log-CPM values showing expression distributions for unnormalised data (A) and normalised data (B)
 
 ## Differential expression analysis
