@@ -77,7 +77,7 @@ PC <- prcomp(voom(t(exp))$E, scale.=T, center = T)
 samples <- rownames(PC$x)
 png(filename="./figures/PCA_outlier_analysis.png")
 ggplot(data.frame(PC$x),aes(PC1,PC2,color=samples)) + 
-  geom_point() +
+  geom_point(size = 5) +
   ggtitle("PCA after voom normalization") + 
   theme_bw() + 
   theme(plot.title = element_text(face="bold", color="black", size=14, hjust=0.5))
