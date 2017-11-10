@@ -205,7 +205,7 @@ ENSMUSG00000026249.10|Serpine2|4.423638752|6.970224139|122.0486693|3.06E-14|4.24
 ENSMUSG00000050912.15|Tmem123|-1.903255652|8.16040951|-111.8056117|6.12E-14|7.49E-11|22.93191957
 ### Table: Top 10 differentially expressed genes (deg); top 500 deg can be found in ./codes/data/top_500_deg.txt
 
-### Plot the heat map showing the normalized expression of top 500 DE genes
+### Heat map showing the normalized expression of top 500 DE genes
 
 ```r
 Samples = c("A", "A", "B", "B")
@@ -217,7 +217,7 @@ clustering_distance_cols = "euclidean", clustering_distance_rows = "euclidean")
 ```
 ![alt text](./figures/heatmap.png "Logo Title Text 5")
 
-## Gene ontology on the differentially expressed genes
+## Gene ontology of the differentially expressed genes
 
 ```r
 # Collect fold change of DE genes
